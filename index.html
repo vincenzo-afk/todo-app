@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doto — Stay on Track</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-wrapper">
+
+    <header class="app-header">
+      <div class="header-left">
+        <span class="app-logo">✦</span>
+        <h1 class="app-title">Doto</h1>
+      </div>
+      <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+    </header>
+
+    <main class="todo-card">
+
+      <!-- Input Area -->
+      <div class="input-area">
+        <div class="input-wrapper">
+          <input
+            type="text"
+            id="todoInput"
+            class="todo-input"
+            placeholder="What needs to be done?"
+            maxlength="200"
+            autocomplete="off"
+          >
+          <button class="add-btn" id="addBtn" aria-label="Add todo">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-tabs" id="filterTabs">
+        <button class="filter-tab active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="active">Active</button>
+        <button class="filter-tab" data-filter="completed">Completed</button>
+      </div>
+
+      <!-- Todo List -->
+      <ul class="todo-list" id="todoList"></ul>
+
+      <!-- Footer -->
+      <div class="footer-area" id="footerArea">
+        <span class="task-counter" id="taskCounter">0 tasks left</span>
+        <div class="footer-actions">
+          <button class="clear-btn" id="clearCompletedBtn">Clear Completed</button>
+          <button class="clear-btn danger" id="clearAllBtn">Clear All</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

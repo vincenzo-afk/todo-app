@@ -1,0 +1,714 @@
+/* ===================================================
+   Google Fonts Import (Inter)
+   =================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ===================================================
+   CSS Custom Properties — Light Mode (default)
+   =================================================== */
+:root {
+  --bg:               #F4F1EB;
+  --card-bg:          #FFFFFF;
+  --text-primary:     #1A1A1E;
+  --text-secondary:   #6C6C78;
+  --text-muted:       #A0A0AA;
+  --border:           #E8E4DA;
+  --border-hover:     #C8C2B4;
+  --accent:           #D97706;
+  --accent-hover:     #B45309;
+  --accent-light:     rgba(217, 119, 6, 0.1);
+  --active-border:    #3B82F6;
+  --completed-border: #10B981;
+  --danger:           #EF4444;
+  --progress-red:     #EF4444;
+  --progress-yellow:  #F59E0B;
+  --progress-green:   #10B981;
+  --shadow:           0 2px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+  --shadow-hover:     0 8px 32px rgba(0,0,0,0.1);
+  --drag-highlight:   rgba(217, 119, 6, 0.08);
+  --empty-opacity:    0.35;
+}
+
+/* ===================================================
+   CSS Custom Properties — Dark Mode
+   =================================================== */
+[data-theme="dark"] {
+  --bg:               #0E0E14;
+  --card-bg:          #18181F;
+  --text-primary:     #EEEDE6;
+  --text-secondary:   #9A9AA8;
+  --text-muted:       #60606C;
+  --border:           #282830;
+  --border-hover:     #424252;
+  --accent:           #F59E0B;
+  --accent-hover:     #FBBF24;
+  --accent-light:     rgba(245, 158, 11, 0.12);
+  --active-border:    #60A5FA;
+  --completed-border: #34D399;
+  --danger:           #F87171;
+  --shadow:           0 4px 24px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.4);
+  --shadow-hover:     0 8px 40px rgba(0,0,0,0.65);
+  --drag-highlight:   rgba(245, 158, 11, 0.08);
+  --empty-opacity:    0.25;
+}
+
+/* ===================================================
+   Base Reset
+   =================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ===================================================
+   App Layout
+   =================================================== */
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 44px 16px 80px;
+}
+
+/* ===================================================
+   Header
+   =================================================== */
+.app-header {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-logo {
+  font-size: 20px;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.app-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  color: var(--text-primary);
+  transition: color 0.3s;
+}
+
+/* Dark Mode Toggle Button */
+.dark-mode-toggle {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 17px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: var(--shadow);
+  transition: border-color 0.2s, transform 0.2s ease, box-shadow 0.2s, background 0.3s;
+}
+
+.dark-mode-toggle:hover {
+  border-color: var(--accent);
+  transform: scale(1.08) rotate(12deg);
+  box-shadow: var(--shadow-hover);
+}
+
+.dark-mode-toggle:active {
+  transform: scale(0.94);
+}
+
+/* ===================================================
+   Todo Card
+   =================================================== */
+.todo-card {
+  width: 100%;
+  max-width: 600px;
+  background: var(--card-bg);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* ===================================================
+   Input Area
+   =================================================== */
+.input-area {
+  padding: 18px 18px 16px;
+  border-bottom: 1.5px solid var(--border);
+  transition: border-color 0.3s;
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.todo-input {
+  flex: 1;
+  height: 48px;
+  padding: 0 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.93rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.3s, color 0.3s;
+}
+
+.todo-input::placeholder {
+  color: var(--text-muted);
+}
+
+.todo-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+/* Shake animation for empty input attempt */
+.todo-input.shake-input {
+  animation: shakeInput 0.35s ease;
+  border-color: var(--danger);
+}
+
+.add-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(217, 119, 6, 0.35);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.add-btn:hover {
+  background: var(--accent-hover);
+  transform: scale(1.06);
+  box-shadow: 0 4px 18px rgba(217, 119, 6, 0.45);
+}
+
+.add-btn:active {
+  transform: scale(0.93);
+}
+
+/* ===================================================
+   Progress Bar
+   =================================================== */
+.progress-bar-container {
+  height: 3px;
+  background: var(--border);
+  width: 100%;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  border-radius: 0 2px 2px 0;
+  transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease;
+}
+
+.progress-bar.red    { background: var(--progress-red); }
+.progress-bar.yellow { background: var(--progress-yellow); }
+.progress-bar.green  { background: var(--progress-green); }
+
+/* ===================================================
+   Filter Tabs
+   =================================================== */
+.filter-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 12px 18px;
+  border-bottom: 1.5px solid var(--border);
+  transition: border-color 0.3s;
+}
+
+.filter-tab {
+  padding: 5px 14px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: background 0.18s, color 0.18s, transform 0.14s, box-shadow 0.18s;
+}
+
+.filter-tab:hover {
+  background: var(--border);
+  color: var(--text-primary);
+}
+
+.filter-tab:active {
+  transform: scale(0.95);
+}
+
+.filter-tab.active {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(217, 119, 6, 0.3);
+}
+
+/* ===================================================
+   Todo List Container
+   =================================================== */
+.todo-list {
+  list-style: none;
+  min-height: 2px;
+}
+
+/* ===================================================
+   Todo Item
+   =================================================== */
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--border);
+  border-left: 3px solid transparent;
+  position: relative;
+  cursor: default;
+  /* Slide-in animation for newly added items */
+  animation: slideIn 0.28s cubic-bezier(0.34, 1.46, 0.64, 1) forwards;
+  transition: background 0.15s, border-left-color 0.3s, border-color 0.3s;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item:hover {
+  background: var(--bg);
+}
+
+/* Left border color by status */
+.todo-item.active-item {
+  border-left-color: var(--active-border);
+}
+
+.todo-item.completed-item {
+  border-left-color: var(--completed-border);
+}
+
+/* ===================================================
+   Drag Handle
+   =================================================== */
+.drag-handle {
+  color: var(--text-muted);
+  cursor: grab;
+  font-size: 15px;
+  line-height: 1;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.15s;
+  user-select: none;
+  padding: 0 1px;
+}
+
+.todo-item:hover .drag-handle {
+  opacity: 1;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+/* ===================================================
+   Checkbox
+   =================================================== */
+.todo-checkbox {
+  width: 19px;
+  height: 19px;
+  border-radius: 6px;
+  border: 2px solid var(--border-hover);
+  flex-shrink: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  position: relative;
+  transition: border-color 0.18s, background 0.18s, transform 0.14s;
+}
+
+.todo-checkbox:hover {
+  border-color: var(--accent);
+  transform: scale(1.1);
+}
+
+.todo-checkbox:checked {
+  background: var(--completed-border);
+  border-color: var(--completed-border);
+}
+
+.todo-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 2px;
+  width: 6px;
+  height: 9px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+/* ===================================================
+   Todo Text
+   =================================================== */
+.todo-text {
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.55;
+  word-break: break-word;
+  transition: color 0.2s;
+}
+
+.completed-item .todo-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+/* ===================================================
+   Inline Edit Input
+   =================================================== */
+.edit-input {
+  flex: 1;
+  height: 34px;
+  padding: 0 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  background: var(--bg);
+  border: 1.5px solid var(--accent);
+  border-radius: 8px;
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-light);
+  transition: background 0.2s;
+}
+
+/* ===================================================
+   Item Action Buttons (Edit / Delete)
+   =================================================== */
+.item-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.todo-item:hover .item-actions {
+  opacity: 1;
+}
+
+.action-btn {
+  width: 29px;
+  height: 29px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+  transition: background 0.15s, transform 0.14s, color 0.15s;
+}
+
+.action-btn:hover {
+  background: var(--border);
+  transform: scale(1.1);
+}
+
+.action-btn:active {
+  transform: scale(0.9);
+}
+
+.action-btn.delete-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+}
+
+/* ===================================================
+   Drag & Drop States
+   =================================================== */
+.todo-item.dragging {
+  opacity: 0.4;
+  background: var(--accent-light);
+}
+
+.todo-item.drag-over {
+  background: var(--drag-highlight);
+  border-bottom: 2px solid var(--accent);
+}
+
+/* ===================================================
+   Shake (delete confirm) & Remove Animations
+   =================================================== */
+.todo-item.shaking {
+  animation: shake 0.42s cubic-bezier(.36,.07,.19,.97) forwards;
+  background: rgba(239, 68, 68, 0.05);
+  border-left-color: var(--danger) !important;
+}
+
+.todo-item.removing {
+  animation: slideOut 0.3s ease forwards;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ===================================================
+   Keyframe Animations
+   =================================================== */
+
+/* Slide in from top when todo is added */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 120px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+  }
+}
+
+/* Slide out and fade when todo is removed */
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+    max-height: 120px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px) scaleY(0.7);
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+/* Horizontal shake for delete confirmation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  15%       { transform: translateX(-7px); }
+  30%       { transform: translateX(6px); }
+  45%       { transform: translateX(-5px); }
+  60%       { transform: translateX(4px); }
+  75%       { transform: translateX(-2px); }
+  90%       { transform: translateX(1px); }
+}
+
+/* Shake for empty input */
+@keyframes shakeInput {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(5px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(3px); }
+}
+
+/* Fade-in for empty state */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.93); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ===================================================
+   Empty State
+   =================================================== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 54px 24px;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 14px;
+  opacity: var(--empty-opacity);
+  line-height: 1;
+}
+
+.empty-message {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+}
+
+/* ===================================================
+   Footer Area
+   =================================================== */
+.footer-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 18px;
+  border-top: 1.5px solid var(--border);
+  flex-wrap: wrap;
+  gap: 8px;
+  transition: border-color 0.3s;
+}
+
+.task-counter {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+  transition: color 0.3s;
+}
+
+.footer-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.clear-btn {
+  padding: 5px 12px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.77rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: border-color 0.18s, color 0.18s, background 0.18s, transform 0.14s;
+}
+
+.clear-btn:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+  background: var(--border);
+}
+
+.clear-btn:active {
+  transform: scale(0.95);
+}
+
+.clear-btn.danger:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+  background: rgba(239, 68, 68, 0.07);
+}
+
+/* Utility: hide elements */
+.hidden {
+  display: none !important;
+}
+
+/* ===================================================
+   Responsive — Mobile (≤ 480px)
+   =================================================== */
+@media (max-width: 480px) {
+  .app-wrapper {
+    padding: 24px 10px 60px;
+  }
+
+  .app-title {
+    font-size: 1.45rem;
+  }
+
+  .todo-item {
+    padding: 12px 13px;
+  }
+
+  /* Always show action buttons on mobile (no hover) */
+  .item-actions {
+    opacity: 1;
+  }
+
+  /* Always show drag handle on mobile */
+  .drag-handle {
+    opacity: 0.45;
+  }
+
+  .input-area {
+    padding: 13px;
+  }
+
+  .filter-tabs {
+    padding: 10px 13px;
+  }
+
+  .footer-area {
+    padding: 12px 13px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-actions {
+    width: 100%;
+  }
+
+  .clear-btn {
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+  }
+}
